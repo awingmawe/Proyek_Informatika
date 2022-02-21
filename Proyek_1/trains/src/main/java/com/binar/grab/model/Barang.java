@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "barang")
 @Where(clause = "deleted_date is null")
-public class Barang extends AbstractDate implements Serializable {
+public class Barang implements Serializable {
 
     @Id
     @Column(name="id")
@@ -29,11 +29,4 @@ public class Barang extends AbstractDate implements Serializable {
 
     @Column(name = "harga",length = 11)
     private int harga;
-
-    @JsonIgnore
-    @ManyToOne(targetEntity = Supplier.class, cascade = CascadeType.ALL)
-    private Supplier supplier;
-
-    @OneToMany(mappedBy = "barang")
-    List<Transaksi> transaksi;
 }

@@ -22,30 +22,13 @@ public class BarangImpl implements BarangService {
 
     @Autowired
     public BarangRepo repo;
-    @Autowired
-    public SupplierRepo repoSupp;
+
     @Autowired
     public TemplateResponse templateResponse;
 
     @Override
     public Map insert(Barang barang, Long idsupplier) {
-        try{
-            if (templateResponse.checkNull(barang.getHarga())){
-                templateResponse.templateError("Barang is required!");
-            }
-            if (templateResponse.checkNull(barang.getNama())){
-                templateResponse.templateError("Nama is required!");
-            }
-            Supplier checkId = repoSupp.getbyID(idsupplier);
-            if(templateResponse.checkNull(checkId)){
-                return templateResponse.templateError("Id Supplier tidak ada!");
-            }
-            barang.setSupplier(checkId);
-            Barang save = repo.save(barang);
-            return templateResponse.templateSukses(save);
-        }catch (Exception e){
-            return templateResponse.templateError(e);
-        }
+        return null;
     }
 
     @Override
@@ -57,33 +40,7 @@ public class BarangImpl implements BarangService {
 
     @Override
     public Map update(Barang barang, Long idsupplier) {
-        try{
-            //check id supplier
-            if(templateResponse.checkNull(idsupplier)){
-                return templateResponse.templateError("Id Supplier Tidak Ditemukan");
-            }
-            Supplier idSupplier = repoSupp.getbyID(idsupplier);
-            if (templateResponse.checkNull(idSupplier)){
-                return templateResponse.templateError("Id Supplier Kosong");
-            }
-
-            //check id barang
-            Barang checkIdBarang = repo.getById(barang.getId());
-            if (templateResponse.checkNull(checkIdBarang)){
-                return templateResponse.templateError("Id Barang Kosong");
-            }
-
-            //simpan database
-            checkIdBarang.setNama(barang.getNama());
-            checkIdBarang.setHarga(barang.getHarga());
-            checkIdBarang.setStok(barang.getStok());
-            checkIdBarang.setSatuan(barang.getSatuan());
-            Barang doSave = repo.save(checkIdBarang);
-
-            return templateResponse.templateSukses(doSave);
-        }catch (Exception e){
-            return templateResponse.templateError(e);
-        }
+        return null;
     }
 
     @Override
@@ -93,26 +50,7 @@ public class BarangImpl implements BarangService {
         1. check id barang
         2. update , tanggal delete saja
          */
-        try{
-            if (templateResponse.checkNull(barang)){
-                return templateResponse.templateError("Id Barang Required");
-            }
-
-            //1. check id barang
-            Barang checkIdBarang = repo.getById(barang);
-            if (templateResponse.checkNull(checkIdBarang)){
-                return templateResponse.templateError("Id Barang Kosong");
-            }
-
-            //2. update , tanggal delete
-            checkIdBarang.setDeleted_date(new Date());
-            repo.save(checkIdBarang);
-
-            return templateResponse.templateSukses("Sukses Deleted");
-        }catch (Exception e){
-            log.error("Error di method delete Barang");
-            return templateResponse.templateError(e);
-        }
+        return null;
     }
 
     @Override
@@ -120,15 +58,7 @@ public class BarangImpl implements BarangService {
         /*
         1. buat query dulu where nama barang
          */
-        try{
-            Pageable show_data = PageRequest.of(page,size);
-            Page<Barang> list = repo.findByNama(nama, show_data);
-
-            return templateResponse.templateSukses(list);
-        }catch (Exception e){
-            log.error("Error di method findByNama");
-            return templateResponse.templateError(e);
-        }
+        return null;
     }
 
     @Override
