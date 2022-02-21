@@ -1,6 +1,4 @@
 package com.binar.grab.model;
-
-
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,34 +7,66 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "trains")
-public class Trains implements Serializable {
+public class Trains implements Serializable{
 
     @Id
-    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = false, length = 2048)
     private String description;
 
-    @Column(name = "distance-between-stop", nullable = false)
+    @Column(name = "distancebetweenstop", nullable = false)
     private String distanceBetweenStop;
 
-    @Column(name = "max-speed", nullable = false)
+    @Column(name = "maxspeed", nullable = false)
     private String maxSpeed;
 
-    @Column(name = "sharing-tracks", nullable = false)
+    @Column(name = "sharingtracks", nullable = false)
     private Boolean sharingTracks;
 
-    @Column(name = "grade-crossing", nullable = false)
+    @Column(name = "gradecrossing", nullable = false)
     private Boolean gradeCrossing;
 
-    @Column(name = "train-frequency", nullable = false)
+    @Column(name = "trainfrequency", nullable = false)
     private String trainFrequency;
 
     @Column(name = "amenities", nullable = false)
     private String amenities;
+    
+    public Trains() {}
+    
+    public Trains(Long id, String name, String description, String distanceBetweenStop, String maxSpeed, 
+    		Boolean sharingTracks, Boolean gradeCrossing, String trainFrequency, String amenities) {
+    	this.id = id;
+    	this.name = name;
+    	this.description = description;
+    	this.distanceBetweenStop = distanceBetweenStop;
+    	this.maxSpeed = maxSpeed;
+    	this.sharingTracks = sharingTracks;
+    	this.gradeCrossing = gradeCrossing;
+    	this.trainFrequency = trainFrequency;
+    	this.amenities = amenities;
+    }
+    
+    public Long getId() {return this.id;}
+    
+    public String getName() {return this.name;}
+    
+    public String getDescription() {return this.description;}
+    
+    public String getDistanceBetweenStop() {return this.distanceBetweenStop;}
+    
+    public String getMaxSpeed() {return this.maxSpeed;}
+    
+    public Boolean getSharingTracks() {return this.sharingTracks;}
+    
+    public Boolean getGradeCrossing() {return this.gradeCrossing;}
+    
+    public String getTrainFrequency() {return this.trainFrequency;}
+    
+    public String getAmenities() {return this.amenities;}
 }

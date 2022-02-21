@@ -11,14 +11,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/trains/")
+@RequestMapping("/trains")
 public class TrainController {
     @Autowired
     public TrainService trainService;
 
-    @PostMapping("")
+    @PostMapping("/add")
     public ResponseEntity<Map> insert(@RequestBody Trains trains){
         Map map = trainService.insert(trains);
         return new ResponseEntity<Map>(map, HttpStatus.CREATED);
     }
+   
 }

@@ -51,13 +51,14 @@ public class TrainImpl implements TrainService {
             if (templateResponse.checkNull(trains.getSharingTracks())){
                 templateResponse.templateError("Sharing tracks is required");
             }
-
+            
             // Simpan ke database
             Trains train = trainRepo.save(trains);
-
+            
             return templateResponse.templateSukses(train);
         }catch (Exception e){
             log.error("Error pada method Insert Trains");
+            System.err.println(e.getMessage());
             return templateResponse.templateError(e);
         }
     }
