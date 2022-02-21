@@ -11,16 +11,22 @@ public class TemplateResponse {
 
     public Map templateSukses(Object objek){
         Map map = new HashMap();
-        map.put("data", objek);
-        map.put("message", "sukses");
         map.put("status", "200");
+        map.put("train", objek);
         return map;
     }
 
     public Map templateError(Object objek){
         Map map = new HashMap();
-        map.put("message", "sukses");
         map.put("status", "400");
+        map.put("message", "error");
+        return map;
+    }
+
+    public Map templateErrorEndpoint(){
+        Map map = new HashMap();
+        map.put("status", "405");
+        map.put("message", "invalid endpoint");
         return map;
     }
 
