@@ -1,6 +1,6 @@
 package com.binar.grab.service.impl;
 
-import com.binar.grab.model.Trains;
+import com.binar.grab.model.Train;
 import com.binar.grab.repository.TrainRepo;
 import com.binar.grab.service.TrainService;
 import com.binar.grab.util.TemplateResponse;
@@ -24,7 +24,7 @@ public class TrainImpl implements TrainService {
     public TemplateResponse templateResponse;
 
     @Override
-    public Map insert(Trains trains) {
+    public Map insert(Train trains) {
         try{
             // Validasi kalo inputan dari klien masih ada yang kosong, karena asumsi semua harus required
             if (templateResponse.checkNull(trains.getName())){
@@ -53,7 +53,7 @@ public class TrainImpl implements TrainService {
             }
             
             // Simpan ke database
-            Trains train = trainRepo.save(trains);
+            Train train = trainRepo.save(trains);
             
             return templateResponse.templateSukses(train);
         }catch (Exception e){

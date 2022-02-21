@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "trains")
-public class Trains implements Serializable{
+public class Train{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +37,9 @@ public class Trains implements Serializable{
     @Column(name = "amenities", nullable = false)
     private String amenities;
     
-    public Trains() {}
+    public Train() {}
     
-    public Trains(Long id, String name, String description, String distanceBetweenStop, String maxSpeed, 
+    public Train(Long id, String name, String description, String distanceBetweenStop, String maxSpeed, 
     		Boolean sharingTracks, Boolean gradeCrossing, String trainFrequency, String amenities) {
     	this.id = id;
     	this.name = name;
