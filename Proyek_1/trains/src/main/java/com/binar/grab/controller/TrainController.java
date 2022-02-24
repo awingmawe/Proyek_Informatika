@@ -72,27 +72,15 @@ public class TrainController {
     }
 
     /**
-     * Insert data train
+     * Update data train, edit existing train by id
      * Challenge : HARD Nomor 1
-     * @param train : Objek Train berdasarkan inputan klien
-     * @return ResponseEntity<Map>
-     */
-    @PostMapping("/add")
-    public ResponseEntity<Map> insert(@RequestBody Train train){
-        Map map = trainService.insert(train);
-        return new ResponseEntity<Map>(map, HttpStatus.CREATED);
-    }
-
-    /**
-     * Update data train
-     * Challenge : HARD Nomor 2
      * @param train : Objek Train berdasarkan inputan klien,
      * @param id    : Id_train
      * @return ResponseEntity<Map>
      */
     @PutMapping("/{id}")
     public ResponseEntity<Map> update(@PathVariable(value = "id") Long id, @RequestBody Train train){
-        try{
+    	try{
             Optional<Train> checkId = trainRepo.findById(id);
             if (!checkId.isPresent()){
                 return new ResponseEntity<Map>(templateResponse.templateErrorNotFound("Train not found"), HttpStatus.NOT_FOUND);
@@ -103,5 +91,17 @@ public class TrainController {
             System.err.print(e);
             return new ResponseEntity<Map>(templateResponse.templateErrorNotFound("Bad Request"), HttpStatus.NOT_FOUND);
         }
+    }
+    
+    /**
+     * Insert data train
+     * Challenge : HARD Nomor 2
+     * @param train : Objek Train berdasarkan inputan klien
+     * @return ResponseEntity<Map>
+     */
+    @PostMapping("/")
+    public ResponseEntity<Map> insert(@RequestBody Train train){
+        Map map = trainService.insert(train);
+        return new ResponseEntity<Map>(map, HttpStatus.CREATED);
     }
 }

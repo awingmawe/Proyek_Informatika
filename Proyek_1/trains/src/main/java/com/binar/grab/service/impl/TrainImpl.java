@@ -89,9 +89,10 @@ public class TrainImpl implements TrainService {
                 return templateResponse.templateError("Sharing tracks is required");
             }
             // Simpan ke database
-            Train save = trainRepo.save(trains);
+            trainRepo.save(trains);
 
-            return templateResponse.templateSukses(save);
+            //NOTE : diubah sedikit, ga return objek train nya, biar sesuai sama requirements nya
+            return templateResponse.templateSuksesInsert();
         }catch (Exception e){
             log.error("Error pada method Insert Trains");
             System.err.println(e.getMessage());
@@ -102,7 +103,8 @@ public class TrainImpl implements TrainService {
     @Override
     public Map update(Train train, Long id) {
         try{
-            log.info("Ini Train : " + train);
+            //log.info("Ini Train : " + train);
+        	
             // Validasi kalo inputan dari klien masih ada yang kosong, karena asumsi semua harus required
             if (templateResponse.checkNull(train.getName())){
                 return templateResponse.templateError("Name is required");

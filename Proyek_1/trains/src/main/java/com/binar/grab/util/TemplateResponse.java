@@ -28,6 +28,13 @@ public class TemplateResponse {
         map.put("message", objek);
         return map;
     }
+    
+    public Map templateSuksesInsert() {
+    	Map map = new HashMap();
+    	map.put("status", "201");
+    	map.put("message", "new train added successfully");
+    	return map;
+    }
 
     public Map templateError(Object objek){
         Map map = new HashMap();

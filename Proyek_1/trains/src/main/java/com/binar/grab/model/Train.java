@@ -54,19 +54,27 @@ public class Train{
     
     public Long getId() {return this.id;}
     
+    public void setName(String name) {this.name = name;}
     public String getName() {return this.name;}
     
+    public void setDescription(String description) {this.description = description;}
     public String getDescription() {return this.description;}
     
+    public void setDistanceBetweenStop(String distanceBetweenStop) {this.distanceBetweenStop = distanceBetweenStop;}
     public String getDistanceBetweenStop() {return this.distanceBetweenStop;}
     
+    public void setMaxSpeed(String maxSpeed) {this.maxSpeed = maxSpeed;}
     public String getMaxSpeed() {return this.maxSpeed;}
     
+    public void setSharingTracks(Boolean sharingTracks) {this.sharingTracks = sharingTracks;}
     public Boolean getSharingTracks() {return this.sharingTracks;}
     
+    public void setGradeCrossing(Boolean gradeCrossing) {this.gradeCrossing = gradeCrossing;}
     public Boolean getGradeCrossing() {return this.gradeCrossing;}
     
+    public void setTrainFrequency(String trainFrequency) {this.trainFrequency = trainFrequency;}
     public String getTrainFrequency() {return this.trainFrequency;}
     
+    public void setAmenities(String amenities) {this.amenities = amenities;}
     public String getAmenities() {return this.amenities;}
 }
