@@ -3,6 +3,7 @@ package com.binar.grab.controller;
 import com.binar.grab.model.Train;
 import com.binar.grab.repository.TrainRepo;
 import com.binar.grab.service.TrainService;
+import com.binar.grab.util.TemplateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +22,30 @@ public class TrainController {
     @Autowired
     protected TrainRepo trainRepo;
 
+    @Autowired
+    protected TemplateResponse templateResponse;
+
     @PostMapping("/add")
     public ResponseEntity<Map> insert(@RequestBody Train train){
         Map map = trainService.insert(train);
         return new ResponseEntity<Map>(map, HttpStatus.CREATED);
     }
-   
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Map> update(@PathVariable(value = "id") Long id, @RequestBody Train train){
+        try{
+            Optional<Train> checkId = trainRepo.findById(id);
+            if (!checkId.isPresent()){
+                return new ResponseEntity<Map>(templateResponse.templateErrorNotFound("Train not found"), HttpStatus.NOT_FOUND);
+            }
+            Map map = trainService.update(train, id);
+            return new ResponseEntity<Map>(map, HttpStatus.OK);
+        }catch (Exception e){
+            System.err.print(e);
+            return new ResponseEntity<Map>(templateResponse.templateErrorNotFound("Bad Request"), HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/")
     public ResponseEntity<Map> getAll(){
     	Map<String, Object> map = new HashMap<>();

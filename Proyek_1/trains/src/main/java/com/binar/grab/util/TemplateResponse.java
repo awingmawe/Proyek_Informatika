@@ -16,10 +16,24 @@ public class TemplateResponse {
         return map;
     }
 
+    public Map templateSuksesUpdate(Object objek){
+        Map map = new HashMap();
+        map.put("status", "200");
+        map.put("message", objek);
+        return map;
+    }
+
     public Map templateError(Object objek){
         Map map = new HashMap();
         map.put("status", "400");
-        map.put("message", "error");
+        map.put("message", objek);
+        return map;
+    }
+
+    public Map templateErrorNotFound(Object objek){
+        Map map = new HashMap();
+        map.put("status", "404");
+        map.put("message", objek);
         return map;
     }
 
@@ -32,8 +46,8 @@ public class TemplateResponse {
 
     public boolean checkNull(Object obj){
         if (obj == null){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }

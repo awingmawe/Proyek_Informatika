@@ -28,38 +28,90 @@ public class TrainImpl implements TrainService {
         try{
             // Validasi kalo inputan dari klien masih ada yang kosong, karena asumsi semua harus required
             if (templateResponse.checkNull(trains.getName())){
-                templateResponse.templateError("Name is required");
+                return templateResponse.templateError("Name is required");
             }
             if (templateResponse.checkNull(trains.getAmenities())){
-                templateResponse.templateError("Amenities is required");
+                return templateResponse.templateError("Amenities is required");
             }
             if (templateResponse.checkNull(trains.getDescription())){
-                templateResponse.templateError("Description is required");
+                return templateResponse.templateError("Description is required");
             }
             if (templateResponse.checkNull(trains.getGradeCrossing())){
-                templateResponse.templateError("Grade crossing is required");
+                return templateResponse.templateError("Grade crossing is required");
             }
             if (templateResponse.checkNull(trains.getDistanceBetweenStop())){
-                templateResponse.templateError("Distance between stop is required");
+                return templateResponse.templateError("Distance between stop is required");
             }
             if (templateResponse.checkNull(trains.getMaxSpeed())){
-                templateResponse.templateError("Max speed is required");
+                return templateResponse.templateError("Max speed is required");
             }
             if (templateResponse.checkNull(trains.getTrainFrequency())){
-                templateResponse.templateError("Train frequency is required");
+                return templateResponse.templateError("Train frequency is required");
             }
             if (templateResponse.checkNull(trains.getSharingTracks())){
-                templateResponse.templateError("Sharing tracks is required");
+                return templateResponse.templateError("Sharing tracks is required");
             }
-            
             // Simpan ke database
-            Train train = trainRepo.save(trains);
-            
-            return templateResponse.templateSukses(train);
+            Train save = trainRepo.save(trains);
+
+            return templateResponse.templateSukses(save);
         }catch (Exception e){
             log.error("Error pada method Insert Trains");
             System.err.println(e.getMessage());
-            return templateResponse.templateError(e);
+            return templateResponse.templateError("Failed Validation");
+        }
+    }
+
+    @Override
+    public Map update(Train train, Long id) {
+        try{
+            log.info("Ini Train : " + train);
+            // Validasi kalo inputan dari klien masih ada yang kosong, karena asumsi semua harus required
+            if (templateResponse.checkNull(train.getName())){
+                return templateResponse.templateError("Name is required");
+            }
+            if (templateResponse.checkNull(train.getAmenities())){
+                return templateResponse.templateError("Amenities is required");
+            }
+            if (templateResponse.checkNull(train.getDescription())){
+                return templateResponse.templateError("Description is required");
+            }
+            if (templateResponse.checkNull(train.getGradeCrossing())){
+                return templateResponse.templateError("Grade crossing is required");
+            }
+            if (templateResponse.checkNull(train.getDistanceBetweenStop())){
+                return templateResponse.templateError("Distance between stop is required");
+            }
+            if (templateResponse.checkNull(train.getMaxSpeed())){
+                return templateResponse.templateError("Max speed is required");
+            }
+            if (templateResponse.checkNull(train.getTrainFrequency())){
+                return templateResponse.templateError("Train frequency is required");
+            }
+            if (templateResponse.checkNull(train.getSharingTracks())){
+                return templateResponse.templateError("Sharing tracks is required");
+            }
+
+            Train checkId = trainRepo.getById(id);
+
+            // Update data berdasarkan masukan dari klien
+            checkId.setAmenities(train.getAmenities());
+            checkId.setDescription(train.getDescription());
+            checkId.setMaxSpeed(train.getMaxSpeed());
+            checkId.setName(train.getName());
+            checkId.setSharingTracks(train.getSharingTracks());
+            checkId.setTrainFrequency(train.getTrainFrequency());
+            checkId.setDistanceBetweenStop(train.getDistanceBetweenStop());
+            checkId.setGradeCrossing(train.getGradeCrossing());
+
+            // Simpan ke database
+            trainRepo.save(checkId);
+
+            return templateResponse.templateSuksesUpdate("Train edited succesfully");
+        }catch (Exception e){
+            log.error("Error pada method Update Trains");
+            System.err.println(e.getMessage());
+            return templateResponse.templateError("Failed when edit train");
         }
     }
 }

@@ -6,4 +6,5 @@ import java.util.Map;
 
 public interface TrainService {
     public Map insert(Train contoh);
+    public Map update(Train train, Long id);
 }
