@@ -6,4 +6,7 @@ import java.util.Map;
 
 public interface TrainService {
     public Map insert(Train contoh);
+    public Map getAllSharingTracks();
+    public Map getAllAmenitiesContaining(String keyword);
+    public Map getAll();
 }

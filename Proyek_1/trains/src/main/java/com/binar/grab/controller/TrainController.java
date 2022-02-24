@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,11 +28,7 @@ public class TrainController {
    
     @GetMapping("/")
     public ResponseEntity<Map> getAll(){
-    	Map<String, Object> map = new HashMap<>();
-    	map.put("data", trainRepo.findAll());
-	    map.put("code", "200");
-	    map.put("status", "success");
-	    return new ResponseEntity<Map>(map, HttpStatus.OK);
+	    return new ResponseEntity<Map>(trainService.getAll(), HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
@@ -44,4 +39,27 @@ public class TrainController {
     	}else 	return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
     }
     
+    /**
+     * Cari semua kereta yang sharing-tracks nya === TRUE
+     * Challenge : MEDIUM Nomor 1
+     * @return
+     */
+    @GetMapping("/sharing-tracks")
+    public ResponseEntity<Map> getAllSharingTracks(){
+    	Map<String, Object> map = trainService.getAllSharingTracks();
+    	return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+    
+    /**
+     * Cari semua kereta yang amenities nya mengandung keyword...
+     * Challenge : MEDIUM Nomor 2
+     * @param amenities : keyword
+     * @return ResponseEntity<Map>
+     */
+    @GetMapping("")
+    public ResponseEntity<Map> getTrainByAmenities(@RequestParam(required = false) String amenities){
+    	Map<String, Object> map = trainService.getAllAmenitiesContaining(amenities);
+    	return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+   
 }
