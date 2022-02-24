@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,12 +24,72 @@ public class TrainController {
     @Autowired
     protected TemplateResponse templateResponse;
 
+    /**
+     * Get all data train
+     * Challenge : EASY Nomor 1
+     * @return
+     */
+    @GetMapping("/")
+    public ResponseEntity<Map> getAll(){
+	    return new ResponseEntity<Map>(trainService.getAll(), HttpStatus.OK);
+    }
+
+    /**
+     * Get all data train berdasarkan id
+     * Challenge : EASY Nomor 2
+     * @param id : id_train
+     * @return
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Train> getTrainById(@PathVariable("id") long id){
+    	Optional<Train> trainData = trainRepo.findById(id);
+    	if(trainData.isPresent()) {
+    			return new ResponseEntity<>(trainData.get(), HttpStatus.OK);
+    	}else 	return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
+    }
+    
+    /**
+     * Cari semua kereta yang sharing-tracks nya === TRUE
+     * Challenge : MEDIUM Nomor 1
+     * @return
+     */
+    @GetMapping("/sharing-tracks")
+    public ResponseEntity<Map> getAllSharingTracks(){
+    	Map<String, Object> map = trainService.getAllSharingTracks();
+    	return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+    
+    /**
+     * Cari semua kereta yang amenities nya mengandung keyword...
+     * Challenge : MEDIUM Nomor 2
+     * @param amenities : keyword
+     * @return ResponseEntity<Map>
+     */
+    @GetMapping("")
+    public ResponseEntity<Map> getTrainByAmenities(@RequestParam(required = false) String amenities){
+    	Map<String, Object> map = trainService.getAllAmenitiesContaining(amenities);
+    	return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
+    /**
+     * Insert data train
+     * Challenge : HARD Nomor 1
+     * @param train : Objek Train berdasarkan inputan klien
+     * @return ResponseEntity<Map>
+     */
     @PostMapping("/add")
     public ResponseEntity<Map> insert(@RequestBody Train train){
         Map map = trainService.insert(train);
         return new ResponseEntity<Map>(map, HttpStatus.CREATED);
     }
 
+    /**
+     * Update data train
+     * Challenge : HARD Nomor 2
+     * @param train : Objek Train berdasarkan inputan klien,
+     * @param id    : Id_train
+     * @return ResponseEntity<Map>
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Map> update(@PathVariable(value = "id") Long id, @RequestBody Train train){
         try{
@@ -45,22 +104,4 @@ public class TrainController {
             return new ResponseEntity<Map>(templateResponse.templateErrorNotFound("Bad Request"), HttpStatus.NOT_FOUND);
         }
     }
-
-    @GetMapping("/")
-    public ResponseEntity<Map> getAll(){
-    	Map<String, Object> map = new HashMap<>();
-    	map.put("data", trainRepo.findAll());
-	    map.put("code", "200");
-	    map.put("status", "success");
-	    return new ResponseEntity<Map>(map, HttpStatus.OK);
-    }
-    
-    @GetMapping("/{id}")
-    public ResponseEntity<Train> getTrainById(@PathVariable("id") long id){
-    	Optional<Train> trainData = trainRepo.findById(id);
-    	if(trainData.isPresent()) {
-    			return new ResponseEntity<>(trainData.get(), HttpStatus.OK);
-    	}else 	return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
-    }
-    
 }

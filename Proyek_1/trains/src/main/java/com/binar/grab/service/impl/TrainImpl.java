@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -23,6 +26,40 @@ public class TrainImpl implements TrainService {
     @Autowired
     public TemplateResponse templateResponse;
 
+    @Override
+    public Map getAllSharingTracks(){
+    	try {
+    		List<Train> trains = new ArrayList<>();
+    		trainRepo.findBySharingTracks(true).forEach(trains::add);
+    		
+    		return templateResponse.templateSukses(trains);
+    	}catch (Exception e) {
+    		log.error("Error pada method getAllSharingTracks");
+            System.err.println(e.getMessage());
+            return templateResponse.templateError(e);
+    	}
+    }
+    
+    @Override
+    public Map getAllAmenitiesContaining(String keyword) {
+    	Map<String, Object> map = new HashMap<>();
+    	try {
+    		List<Train> trains = new ArrayList<Train>();
+    		if(keyword == null)
+    			trainRepo.findAll().forEach(trains::add);
+    		else
+    			trainRepo.findByAmenitiesContaining(keyword).forEach(trains::add);
+    		
+    		if(trains.isEmpty()) 	return templateResponse.templateNotFound();
+    		else 					return templateResponse.templateSukses(trains);
+    		
+    	}catch (Exception e) {
+    		log.error("Error pada method getAllAmenitiesContaining");
+            System.err.println(e.getMessage());
+            return templateResponse.templateError(e);
+    	}
+    }
+    
     @Override
     public Map insert(Train trains) {
         try{
@@ -114,4 +151,11 @@ public class TrainImpl implements TrainService {
             return templateResponse.templateError("Failed when edit train");
         }
     }
+
+	@Override
+	public Map getAll() {
+		List<Train> trains = trainRepo.findAll();
+		if(trains == null) return templateResponse.templateNotFound();
+		else return templateResponse.templateSukses(trains);
+	}
 }
