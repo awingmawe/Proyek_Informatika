@@ -78,12 +78,13 @@ public class TrainController {
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Train> getTrainById(@PathVariable("id") long id){
-        Optional<Train> trainData = trainRepo.findById(1);
-        if(trainData.isPresent()) {
-            return new ResponseEntity<>(templateResponse.templateErrorNotFound("train remove successfully"), HttpStatus.OK);
+    public ResponseEntity<Train> deleteTrainById(@PathVariable("id") long id){
+        try {
+            tutorialRepository.deleteById(id);
+            return new ResponseEntity<>(templateResponse.templateSuksesDelete("train removed successfully"), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(templateResponse.templateGagalDelete, HttpStatus.NOT_FOUND);
         }
-        else return new ResponseEntity<>(templateResponse.templateErrorNotFound("train not found"), HttpStatus.NOT_FOUND);
     }
 
     /**
