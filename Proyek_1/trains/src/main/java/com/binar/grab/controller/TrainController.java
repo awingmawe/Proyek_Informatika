@@ -72,6 +72,21 @@ public class TrainController {
     }
 
     /**
+     * Delete data train dengan id = 1
+     * Challenge : MEDIUM Nomor 3
+     * @param id : id_train
+     * @return
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Train> getTrainById(@PathVariable("id") long id){
+        Optional<Train> trainData = trainRepo.findById(1);
+        if(trainData.isPresent()) {
+            return new ResponseEntity<>(templateResponse.templateErrorNotFound("train remove successfully"), HttpStatus.OK);
+        }
+        else return new ResponseEntity<>(templateResponse.templateErrorNotFound("train not found"), HttpStatus.NOT_FOUND);
+    }
+
+    /**
      * Update data train, edit existing train by id
      * Challenge : HARD Nomor 1
      * @param train : Objek Train berdasarkan inputan klien,
