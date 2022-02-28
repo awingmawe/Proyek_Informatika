@@ -155,19 +155,21 @@ public class TrainImpl implements TrainService {
     }
 
     @Override
-    public Map delete(Train trains, Long id) {
+    public Map delete(Long id) {
         try{
             //gatau diisi apa
-
-            // Simpan ke database
-            trainRepo.save(trains);
-
+            Train checkId = trainRepo.getById(id);
+            if (templateResponse.checkNull(checkId)){
+                return templateResponse.templateNotFound();
+            }
+            // Delete ke database
+            trainRepo.deleteById(id);
             //NOTE : diubah sedikit, ga return objek train nya, biar sesuai sama requirements nya
-            return templateResponse.templateSuksesDelete();
+            return templateResponse.templateSukses("train remove successfully");
         }catch (Exception e){
             log.error("Error pada method Delete Trains");
             System.err.println(e.getMessage());
-            return templateResponse.templateGagalDelete("train not found");
+            return templateResponse.templateNotFound();
         }
     }
 

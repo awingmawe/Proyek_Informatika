@@ -75,15 +75,14 @@ public class TrainController {
      * Delete data train dengan id = 1
      * Challenge : MEDIUM Nomor 3
      * @param id : id_train
-     * @return
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<Train> deleteTrainById(@PathVariable("id") long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map> deleteTrainById(@PathVariable("id") long id){
         try {
-            tutorialRepository.deleteById(id);
-            return new ResponseEntity<>(templateResponse.templateSuksesDelete("train removed successfully"), HttpStatus.OK);
+            Map map = trainService.delete(id);
+            return new ResponseEntity<Map>(map, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(templateResponse.templateGagalDelete, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Map>(templateResponse.templateNotFound(), HttpStatus.NOT_FOUND);
         }
     }
 
