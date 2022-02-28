@@ -1,3 +1,6 @@
+.idea/
+Proyek_1/trains/src/main/resources/application.properties
+*.properties
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar

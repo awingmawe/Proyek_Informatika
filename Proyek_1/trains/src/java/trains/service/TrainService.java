@@ -1,6 +1,6 @@
-package com.binar.grab.service;
+package trains.service;
 
-import com.binar.grab.model.Train;
+import trains.model.Train;
 
 import java.util.Map;
 

@@ -6,13 +6,13 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.6.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from trains.repository -->
 	</parent>
-	<groupId>com.binar</groupId>
-	<artifactId>grab</artifactId>
+	<groupId>trains</groupId>
+	<artifactId>trains</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>grab</name>
-	<description>Project Binar Grab</description>
+	<name>trains</name>
+	<description>Proyek Informatika Trains</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -47,31 +47,7 @@
 			<version>5.6.5.Final</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-<!--		<dependency>-->
-<!--			<groupId>org.projectlombok</groupId>-->
-<!--			<artifactId>lombok</artifactId>-->
-<!--			<version>1.18.22</version>-->
-<!--			<scope>provided</scope>-->
-<!--		</dependency>-->
 	</dependencies>
-
-<!--	<build>-->
-<!--		<plugins>-->
-<!--			<plugin>-->
-<!--				<groupId>org.springframework.boot</groupId>-->
-<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--				<configuration>-->
-<!--					<excludes>-->
-<!--						<exclude>-->
-<!--							<groupId>org.projectlombok</groupId>-->
-<!--							<artifactId>lombok</artifactId>-->
-<!--						</exclude>-->
-<!--					</excludes>-->
-<!--				</configuration>-->
-<!--			</plugin>-->
-<!--		</plugins>-->
-<!--	</build>-->
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>

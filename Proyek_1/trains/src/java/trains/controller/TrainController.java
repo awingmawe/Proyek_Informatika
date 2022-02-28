@@ -1,9 +1,9 @@
-package com.binar.grab.controller;
+package trains.controller;
 
-import com.binar.grab.model.Train;
-import com.binar.grab.repository.TrainRepo;
-import com.binar.grab.service.TrainService;
-import com.binar.grab.util.TemplateResponse;
+import trains.model.Train;
+import trains.repository.TrainRepo;
+import trains.service.TrainService;
+import trains.util.TemplateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

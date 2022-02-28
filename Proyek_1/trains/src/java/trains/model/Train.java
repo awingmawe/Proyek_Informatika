@@ -1,8 +1,7 @@
-package com.binar.grab.model;
+package trains.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Data
 @Entity

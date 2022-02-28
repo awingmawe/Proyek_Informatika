@@ -1,6 +1,6 @@
-package com.binar.grab.repository;
+package trains.repository;
 
-import com.binar.grab.model.Train;
+import trains.model.Train;
 
 import java.util.List;
 
