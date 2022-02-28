@@ -1,6 +1,6 @@
-package trains.repository;
+package com.trains.repository;
 
-import trains.model.Train;
+import com.trains.model.Train;
 
 import java.util.List;
 

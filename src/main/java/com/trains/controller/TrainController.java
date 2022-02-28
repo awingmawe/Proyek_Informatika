@@ -1,9 +1,9 @@
-package trains.controller;
+package com.trains.controller;
 
-import trains.model.Train;
-import trains.repository.TrainRepo;
-import trains.service.TrainService;
-import trains.util.TemplateResponse;
+import com.trains.model.Train;
+import com.trains.repository.TrainRepo;
+import com.trains.service.TrainService;
+import com.trains.util.TemplateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
-package trains.service;
+package com.trains.service;
 
-import trains.model.Train;
+import com.trains.model.Train;
 
 import java.util.Map;
 

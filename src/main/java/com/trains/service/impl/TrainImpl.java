@@ -1,9 +1,9 @@
-package trains.service.impl;
+package com.trains.service.impl;
 
-import trains.model.Train;
-import trains.repository.TrainRepo;
-import trains.service.TrainService;
-import trains.util.TemplateResponse;
+import com.trains.model.Train;
+import com.trains.repository.TrainRepo;
+import com.trains.service.TrainService;
+import com.trains.util.TemplateResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

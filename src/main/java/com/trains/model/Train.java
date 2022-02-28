@@ -1,4 +1,4 @@
-package trains.model;
+package com.trains.model;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package trains.util;
+package com.trains.util;
 
 import org.springframework.stereotype.Component;
 
