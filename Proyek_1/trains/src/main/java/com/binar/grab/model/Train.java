@@ -7,9 +7,11 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "trains")
-public class Train{
+public class Train implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
