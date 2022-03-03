@@ -8,11 +8,11 @@
 		<version>2.6.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.trains</groupId>
-	<artifactId>trains</artifactId>
+	<groupId>com.binar</groupId>
+	<artifactId>grab</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>train_manager</name>
-	<description>TopCoder Train Manager</description>
+	<name>grab</name>
+	<description>Project Binar Grab</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -55,7 +55,7 @@
      			<configuration>
       	 			<archive>
           				<manifest>
-            				<mainClass>com.trains.TrainsApplication</mainClass>
+            				<mainClass>com.binar.grab.GrabApplication</mainClass>
           				</manifest>
         			</archive>
         			<descriptorRefs>
