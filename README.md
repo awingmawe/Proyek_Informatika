@@ -46,7 +46,7 @@ psql
 
 Create a new database `train`:
 ```sh
-createdb train
+create database train;
 ```
 
 ## Build
