@@ -32,7 +32,7 @@ public class TemplateResponse {
     public Map templateSuksesInsert() {
     	Map map = new HashMap();
     	map.put("status", "201");
-    	map.put("message", "new train added successfully");
+    	map.put("message", "new train(s) added successfully");
     	return map;
     }
 

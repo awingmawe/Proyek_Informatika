@@ -9,11 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/trains")
+@RequestMapping(value = "/trains", produces = "application/json")
 public class TrainController {
     @Autowired
     protected TrainService trainService;
@@ -115,8 +116,8 @@ public class TrainController {
      * @return ResponseEntity<Map>
      */
     @PostMapping("/")
-    public ResponseEntity<Map> insert(@RequestBody Train train){
-        Map map = trainService.insert(train);
+    public ResponseEntity<Map> insert(@RequestBody List<Train> trains){
+        Map map = trainService.insert(trains);
         return new ResponseEntity<Map>(map, HttpStatus.CREATED);
     }
 }

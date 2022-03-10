@@ -61,35 +61,38 @@ public class TrainImpl implements TrainService {
     }
     
     @Override
-    public Map insert(Train trains) {
+    public Map insert(List<Train> trains) {
         try{
-            // Validasi kalo inputan dari klien masih ada yang kosong, karena asumsi semua harus required
-            if (templateResponse.checkNull(trains.getName())){
-                return templateResponse.templateError("Name is required");
-            }
-            if (templateResponse.checkNull(trains.getAmenities())){
-                return templateResponse.templateError("Amenities is required");
-            }
-            if (templateResponse.checkNull(trains.getDescription())){
-                return templateResponse.templateError("Description is required");
-            }
-            if (templateResponse.checkNull(trains.getGradeCrossing())){
-                return templateResponse.templateError("Grade crossing is required");
-            }
-            if (templateResponse.checkNull(trains.getDistanceBetweenStop())){
-                return templateResponse.templateError("Distance between stop is required");
-            }
-            if (templateResponse.checkNull(trains.getMaxSpeed())){
-                return templateResponse.templateError("Max speed is required");
-            }
-            if (templateResponse.checkNull(trains.getTrainFrequency())){
-                return templateResponse.templateError("Train frequency is required");
-            }
-            if (templateResponse.checkNull(trains.getSharingTracks())){
-                return templateResponse.templateError("Sharing tracks is required");
-            }
+        	for(Train t : trains) {
+        		// Validasi kalo inputan dari klien masih ada yang kosong, karena asumsi semua harus required
+                if (templateResponse.checkNull(t.getName())){
+                    return templateResponse.templateError("Name is required");
+                }
+                if (templateResponse.checkNull(t.getAmenities())){
+                    return templateResponse.templateError("Amenities is required");
+                }
+                if (templateResponse.checkNull(t.getDescription())){
+                    return templateResponse.templateError("Description is required");
+                }
+                if (templateResponse.checkNull(t.getGradeCrossing())){
+                    return templateResponse.templateError("Grade crossing is required");
+                }
+                if (templateResponse.checkNull(t.getDistanceBetweenStop())){
+                    return templateResponse.templateError("Distance between stop is required");
+                }
+                if (templateResponse.checkNull(t.getMaxSpeed())){
+                    return templateResponse.templateError("Max speed is required");
+                }
+                if (templateResponse.checkNull(t.getTrainFrequency())){
+                    return templateResponse.templateError("Train frequency is required");
+                }
+                if (templateResponse.checkNull(t.getSharingTracks())){
+                    return templateResponse.templateError("Sharing tracks is required");
+                }
+        	}
+            
             // Simpan ke database
-            trainRepo.save(trains);
+            trainRepo.saveAll(trains);
 
             //NOTE : diubah sedikit, ga return objek train nya, biar sesuai sama requirements nya
             return templateResponse.templateSuksesInsert();
