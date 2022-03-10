@@ -49,8 +49,14 @@ Create a new database `train`:
 create database train;
 ```
 
+## Run
+
+```sh
+mvn spring-boot:run
+```
+
 ## Build
-Run a maven build using this command
+Run a maven build by using this command
 ```sh
 mvn clean package spring-boot:repackage
 ```
@@ -61,7 +67,7 @@ java -jar target/trains-0.0.1-SNAPSHOT.jar
 ```
 
 ## Dummy Data in JSON
-Send POST Request to ```localhost:8080/api/trains``` with body (raw JSON) :
+Send POST Request to ```localhost:8080/api/trains/``` with body (raw JSON) :
 ```json
 [
   {
@@ -121,4 +127,40 @@ Send POST Request to ```localhost:8080/api/trains``` with body (raw JSON) :
   }
 ]
 ```
+
+## Endpoints
+1. __View All Trains__
+- Method : GET
+- URL : ```/api/trains/```
+
+2. __View Train Details By Id (Find By Id)__
+- Method : GET
+- URL : ```/api/trains/:id```
+
+3. __Search train that have same sharing-tracks__
+- This need return train that have sharing-tracks === true values
+- Method : GET
+- URL : ``` /api/trains/sharing-tracks```
+
+4. __Search trains which amenities values contains keyword__
+- Method : GET
+- URL : ```/api/trains?amenities=[keyword]```
+
+5. __Delete a train__
+- Method : DELETE
+- URL : ```/api/trains/:id```
+
+6. __Edit existing train by id__
+- Method : PUT
+- URL : ```/api/trains/:id```
+- Body request need allow to change all models:<br />
+    **name**: String <br />
+    **description**: String <br />
+    **distanceBetweenStop**: String <br />
+    **maxSpeed**: String <br />
+    **sharingTracks**: Boolean <br />
+    **gradeCrossing**: Boolean <br />
+    **trainFrequency**: String <br />
+    **amenities**: String <br />
+
 
